@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter } from 'react-router-dom';
 import './css/index.css';
-import App from './components/App';
 import * as serviceWorker from './helper/serviceWorker';
-
+// Application routes
+import App from './components/App';
+import Home from './components/Home';
 const appRoutes = [
 	{
 		exact: true,
 		path: "/",
 		component: App
+	},
+	{
+		exact: false,
+		path: "/home",
+		component: Home
 	}
 ]
 
