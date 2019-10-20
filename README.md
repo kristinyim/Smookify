@@ -1,3 +1,13 @@
+## Resources:
+# React Router (https://blog.pshrmn.com/simple-react-router-v4-tutorial/)
+- <BrowserRouter> randles dynamic requests
+- Each router creates a History object that keeps track of current location and re-renders the site if it changes. 
+- Other components rely on History object and are rendered as descendants of a router component. 
+- Thus, create an <App> component that renders the rest of your application.
+	Separates application from the router. Can re-use <App> on the server when you swtich to a <MemoryRouter>
+
+
+----
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
