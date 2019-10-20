@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import logo from '../img/logo.svg';
 import '../css/App.css';
-import axios from "axios";
+import axios from 'axios';
 import {
   spotifyWebApiURL,
   spotifyProfileURL
-} from "../helper/constants";
+} from '../helper/constants';
 
 export default class App extends Component {
   constructor(props) {
