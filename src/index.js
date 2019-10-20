@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter } from 'react-router-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import './css/index.css';
+import App from './components/App';
+import * as serviceWorker from './helper/serviceWorker';
 
 const appRoutes = [
 	{
