@@ -6,6 +6,7 @@ import * as serviceWorker from './helper/serviceWorker';
 // Application routes
 import App from './components/App';
 import Home from './components/Home';
+import Study from './components/Study';
 const appRoutes = [
 	{
 		exact: true,
@@ -16,6 +17,11 @@ const appRoutes = [
 		exact: false,
 		path: "/home",
 		component: Home
+	},
+	{
+		exact: false,
+		path: "/study",
+		component: Study
 	}
 ]
 

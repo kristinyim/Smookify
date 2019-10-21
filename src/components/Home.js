@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { spotifySearchURL } from '../helper/constants';
+import { 
+	spotifySearchURL,
+	spotifyPlaylistURL
+} from '../helper/constants';
 import {
   Container, 
   Row,
@@ -22,7 +25,8 @@ export default class Home extends Component {
 			current_user: [],
 			auth: [],
 			query: '',
-			playlists: []
+			playlists: [],
+			tracks: []
 		}
 	}
 
@@ -69,7 +73,10 @@ export default class Home extends Component {
 					    <Card.Text>
 					      {p.owner.display_name}
 					    </Card.Text>
-					    <Button variant="primary">Go somewhere</Button>
+					    <Button
+					    	variant="primary"
+					    	onClick={(event) => this.studyPlaylist(event,p.id,p.name)}
+					    	>Go somewhere</Button>
 					  </Card.Body>
 					</Card>
 				)
@@ -78,6 +85,22 @@ export default class Home extends Component {
 		} else {
 			return <p>No results</p>
 		}
+	}
+
+	studyPlaylist = (event, playlist_id, playlist_name) => {
+		event.preventDefault();
+		axios.get(`${spotifyPlaylistURL}${playlist_id}/tracks?access_token=${this.state.auth}`)
+		.then(response => {
+			this.setState({ tracks: response.data.items });
+		})
+		.then(() => this.props.history.push('/study', {
+            current_user: this.state.current_user,
+            auth: this.state.auth,
+            tracks: this.state.tracks
+          }))
+        .catch(error => {
+          console.log(error);
+        });
 	}
 
 	render() {
@@ -103,7 +126,7 @@ export default class Home extends Component {
 		return (
 			<Container>
 				<Navbar bg="light" >
-					<Navbar.Brand href="#home">Smookify</Navbar.Brand>
+					<Navbar.Brand href="/">Smookify</Navbar.Brand>
 					<Navbar.Collapse className="justify-content-end">
 						<Form inline onSubmit={this.searchPlaylist}>
 				    	<FormControl
