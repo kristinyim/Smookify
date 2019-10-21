@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/bootstrap.css';
 
 const Card = ({ imageURL, name, id, onClick, text }) => {
     if(imageURL){

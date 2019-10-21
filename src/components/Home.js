@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Card } from './Card';
 import { spotifySearchURL } from '../helper/constants';
+import {
+  Container, 
+  Row,
+  Col,
+  Image,
+  Navbar,
+  Form,
+  Button,
+  FormControl,
+  Card,
+  CardColumns
+} from 'react-bootstrap';
 
 export default class Home extends Component {
 	constructor(props) {
@@ -51,43 +62,69 @@ export default class Home extends Component {
 			playlists.map((p, index) => {
 				let hasImage = p.images[0];
 				results.push(
-					<Card
-						name={p.name}
-						id={p.id}
-						key={index}
-						imageURL={hasImage.url}
-					/>
+					<Card key={p.id} border="success">
+					  <Card.Img variant="top" src={hasImage.url} style={{ maxWidth: '150', maxHeight: '150', minHeight: '100' }}/>
+					  <Card.Body>
+					    <Card.Title>{p.name}</Card.Title>
+					    <Card.Text>
+					      {p.owner.display_name}
+					    </Card.Text>
+					    <Button variant="primary">Go somewhere</Button>
+					  </Card.Body>
+					</Card>
 				)
 			})
-			return results
+			return <CardColumns md='2'> { results } </CardColumns>
 		} else {
 			return <p>No results</p>
 		}
 	}
 
 	render() {
-		return (
+		const { images, display_name } = this.props.location.state.current_user.user;
+		const welcome = (
 			<div>
-				<p>hi</p>
-				<form onSubmit={this.searchPlaylist}>
-					<input
-						type="text"
-						placeholder="enter playlist name"
-						onChange={
-							event => {
-								this.captureSearch(event.target.value)
-							}
-						}
-						value={this.state.query}
-					/>
-					<button
-						type="submit"
-					>
-						Submit
-					</button>
-				</form>
-				{this.showPlaylistResults(this.state.playlists.items)}
+				<Row className="justify-content-md-center">
+					<Image src={images[0].url} roundedCircle
+							style={{
+									width:"150px",
+									padding: "5px"
+								}}
+						/>
+				</Row>
+				<Row className="justify-content-md-center">
+					<h1> Welcome { display_name} </h1>
+				</Row>
+				<Row className="justify-content-md-center">
+					<h3 style={{color: "grey"}}> Start searching above to get started</h3>
+				</Row>
 			</div>
+			)
+		return (
+			<Container>
+				<Navbar bg="light" >
+					<Navbar.Brand href="#home">Smookify</Navbar.Brand>
+					<Navbar.Collapse className="justify-content-end">
+						<Form inline onSubmit={this.searchPlaylist}>
+				    	<FormControl
+				    		type="text"
+				    		placeholder="Search Playlists"
+				    		className="mr-sm-2"
+				    		onChange={
+									event => {
+										this.captureSearch(event.target.value)
+									}
+								}
+							value={this.state.query}
+						/>
+				    	<Button type="submit">Search</Button>
+				    </Form>
+					</Navbar.Collapse>
+				</Navbar>
+				<Row className="justify-content-md-center" style={{paddingTop:"50px"}}>
+					{ this.state.playlists.items ? this.showPlaylistResults(this.state.playlists.items) : welcome }
+				</Row>
+			</Container>
 		);
 	}
 }

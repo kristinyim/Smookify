@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import logo from '../img/logo.svg';
-import '../css/App.css';
 import axios from 'axios';
+import {
+  Container, 
+  Row,
+} from 'react-bootstrap';
 import {
   spotifyWebApiURL,
   spotifyProfileURL
@@ -56,20 +58,29 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <p>
-          {this.state.authorized
-            ? "Authorized. Enter below"
-            : "Click below to authorize our Spotify account"}
-        </p>
-        <button
-          type="button"
-          onClick={this.handleAuthFlow}>
-          {this.state.authorized
-            ? "Proceed to Smookify"
-            : "Sign in with Spotify"}
-        </button>
-      </div>
+       <Container>
+        <Row>
+          <h1> Smookify: Study for Pop@Hop </h1>
+        </Row>
+        <Row>
+          <p className="display-5">
+              {this.state.authorized
+                ? "Successfully authorized! Click below to Enter!"
+                : "Just click the button below to authorize your Spotify account to start using React Spotify!"}
+          </p>
+        </Row>
+        <Row>
+          <button
+            type="button"
+            className="btn btn-outline-success"
+            onClick={this.handleAuthFlow}
+          >
+            {this.state.authorized
+              ? "Proceed to Smookify"
+              : "Sign in with Spotify"}
+          </button>
+        </Row>
+      </Container>
     );
   }
 };

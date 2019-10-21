@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter } from 'react-router-dom';
-import './css/index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './helper/serviceWorker';
 // Application routes
 import App from './components/App';
