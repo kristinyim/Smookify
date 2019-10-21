@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SpotifyPlayer from 'react-spotify-web-playback';
 import { 
 	spotifySearchURL,
 	spotifyPlaylistURL
@@ -43,8 +44,16 @@ export default class Study extends Component {
 		}
 	}
 
-	studyTrack = (track) => {
-
+	studyTrack = (t) => {
+		if (t != undefined) {
+			console.log(t.track.uri)
+			return <SpotifyPlayer
+			  token={ this.state.auth }
+			  uris={['spotify:track:6WBTeFDEfAJbaSUUc1V1xQ']}
+			/>;
+		} else {
+			return <p></p>
+		}
 	}
 
 

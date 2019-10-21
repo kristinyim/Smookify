@@ -5,7 +5,7 @@ import {
 
 let prod = false;
 
-const scopes = "user-read-private+user-read-email+playlist-read-private+user-top-read+user-read-recently-played";
+const scopes = "user-read-private+user-read-email+playlist-read-private+user-top-read+user-read-recently-played+streaming+user-read-playback-state+user-modify-playback-state";
 const redirectURI = prod ? "http://kristinstrawberryyim.com/smookify" : "http://localhost:3000/";
 
 export const spotifyWebApiURL = `https://accounts.spotify.com/authorize/?client_id=${clientID
